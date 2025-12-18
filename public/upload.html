@@ -2,13 +2,13 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <title>Загрузка картинки</title>
+    <title>Upload</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="/styles.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
-      <h2>Этап 1: Загрузка картинки</h2>
+      <h2>Step 1: Upload image</h2>
       <form id="uploadForm">
         <input
           type="file"
@@ -18,10 +18,10 @@
           multiple
           required
         />
-        <button type="submit">Загрузить</button>
+        <button type="submit">Upload</button>
       </form>
       <pre id="result"></pre>
-      <p><a href="/">На главную</a></p>
+      <p><a href="/">Home</a></p>
     </div>
     <script>
       const form = document.getElementById("uploadForm");
@@ -29,7 +29,7 @@
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        result.textContent = "Загрузка...";
+        result.textContent = "Uploading...";
         const fd = new FormData();
         const files = document.getElementById("images").files;
         for (const f of files) fd.append("images", f);
@@ -41,7 +41,7 @@
           const json = await res.json();
           result.textContent = JSON.stringify(json, null, 2);
         } catch (e) {
-          result.textContent = "Ошибка: " + e.message;
+          result.textContent = "Error: " + e.message;
         }
       });
     </script>

@@ -2,22 +2,22 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <title>Разметка: Это карандаш?</title>
+    <title>Label: Is it a pencil?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="/styles.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
-      <h2>Этап 2: Разметка</h2>
+      <h2>Step 2: Label</h2>
       <div id="viewer" class="viewer">
         <img id="img" alt="image to label" />
       </div>
       <div class="buttons">
-        <button id="yesBtn">Да, карандаш</button>
-        <button id="noBtn" class="secondary">Нет</button>
+        <button id="yesBtn">Yes, pencil</button>
+        <button id="noBtn" class="secondary">No</button>
       </div>
       <pre id="status"></pre>
-      <p><a href="/">На главную</a></p>
+      <p><a href="/">Home</a></p>
     </div>
     <script>
       let current = null;
@@ -25,23 +25,23 @@
       const statusEl = document.getElementById("status");
 
       async function loadNext() {
-        statusEl.textContent = "Загрузка следующего изображения...";
+        statusEl.textContent = "Loading next image...";
         img.src = "";
         current = null;
         const res = await fetch("/api/images/next-unlabeled");
         if (res.status === 404) {
-          statusEl.textContent = "Неразмеченных изображений нет.";
+          statusEl.textContent = "No unlabeled images.";
           return;
         }
         const json = await res.json();
         current = json.id;
         img.src = json.url;
-        statusEl.textContent = "Ответьте: это карандаш?";
+        statusEl.textContent = "Answer: is it a pencil?";
       }
 
       async function label(isPencil) {
         if (!current) return;
-        statusEl.textContent = "Сохраняю метку...";
+        statusEl.textContent = "Saving label...";
         const res = await fetch("/api/images/" + current + "/label", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -49,9 +49,9 @@
         });
         const json = await res.json();
         if (!res.ok) {
-          statusEl.textContent = "Ошибка: " + (json.error || res.statusText);
+          statusEl.textContent = "Error: " + (json.error || res.statusText);
         } else {
-          statusEl.textContent = "Сохранено: " + json.label;
+          statusEl.textContent = "Saved: " + json.label;
           await loadNext();
         }
       }

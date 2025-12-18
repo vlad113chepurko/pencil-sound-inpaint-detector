@@ -2,22 +2,22 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <title>Проверка: есть ли карандаш?</title>
+    <title>Check: Is there a pencil?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="/styles.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
-      <h2>Этап 3: Проверка изображения</h2>
+      <h2>Step 3: Image Check</h2>
       <form id="clsForm">
         <input type="file" id="image" name="image" accept="image/*" required />
-        <button type="submit">Проверить</button>
+        <button type="submit">Check</button>
       </form>
       <div id="previewWrap" class="viewer" style="display: none">
         <img id="preview" alt="preview" />
       </div>
       <pre id="result"></pre>
-      <p><a href="/">На главную</a></p>
+      <p><a href="/">Home</a></p>
     </div>
     <script>
       const form = document.getElementById("clsForm");
@@ -43,13 +43,13 @@
           });
           const json = await res.json();
           if (!res.ok) {
-            result.textContent = "Ошибка: " + (json.error || res.statusText);
+            result.textContent = "Error: " + (json.error || res.statusText);
             return;
           }
-          const verdict = json.hasPencil ? "Есть карандаш" : "Карандаша нет";
+          const verdict = json.hasPencil ? "There is a pencil" : "No pencil found";
           result.textContent = verdict + "\n\n" + JSON.stringify(json, null, 2);
         } catch (e) {
-          result.textContent = "Ошибка: " + e.message;
+          result.textContent = "Error: " + e.message;
         }
       });
     </script>
