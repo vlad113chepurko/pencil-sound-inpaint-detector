@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Text‑to‑Speech (TTS)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <h2>Text-to-Speech</h2>
+        <h3>Enter text to synthesize</h3>
+        <textarea
+          id="tts-text"
+          rows="6"
+          placeholder="Enter text to synthesize..."
+        >
+Hello! This is a speech synthesis example.</textarea
+        >
+      </section>
+
+      <section class="card grid-2">
+        <div>
+          <label for="voice">Voice (browser):</label>
+          <select id="voice"></select>
+        </div>
+        <div>
+          <label for="lang">Language (server):</label>
+          <select id="lang">
+            <option value="ru" selected>Русский (ru)</option>
+            <option value="en">English (en)</option>
+            <option value="uk">Українська (uk)</option>
+            <option value="de">Deutsch (de)</option>
+            <option value="fr">Français (fr)</option>
+            <option value="es">Español (es)</option>
+          </select>
+        </div>
+        <div>
+          <label for="rate">Rate:</label>
+          <input
+            id="rate"
+            type="range"
+            min="0.5"
+            max="2"
+            step="0.1"
+            value="1"
+          />
+        </div>
+        <div>
+          <label for="pitch">Pitch:</label>
+          <input id="pitch" type="range" min="0" max="2" step="0.1" value="1" />
+        </div>
+      </section>
+
+      <section class="card actions">
+        <button id="btn-speak">Speak in browser</button>
+      </section>
+
+      <section class="card">
+        <h2>Listening to the result</h2>
+        <audio id="player" controls></audio>
+        <p id="status" class="muted"></p>
+      </section>
+    </main>
+
+    <script src="/tts.js" type="module"></script>
+  </body>
+</html>
